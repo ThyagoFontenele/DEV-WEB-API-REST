@@ -1,10 +1,10 @@
 package com.devweb.eventoapi.model;
 
-public class Cliente {
+public class Usuario {
     public String nome;
     public int id;
     
-    public Cliente(String nome, int id) {
+    public Usuario(String nome, int id) {
         this.nome = nome;
         this.id = id;
     }

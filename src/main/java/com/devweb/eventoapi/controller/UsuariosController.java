@@ -1,6 +1,6 @@
 package com.devweb.eventoapi.controller;
 
-import com.devweb.eventoapi.model.Cliente;
+import com.devweb.eventoapi.model.Usuario;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "api/v1/clientes")
-public class ClientesController {
+public class UsuariosController {
   
     @GetMapping
-    public List<Cliente> getClientes() {
-        return List.of(new Cliente("thyago", 1));
+    public List<Usuario> getUsuarios() {
+        return List.of(new Usuario("thyago", 1));
     }
     
     @GetMapping("/{id}")
-    public Cliente getCliente(@PathVariable(value = "id") int id) {
-        return new Cliente("thyago", id);
+    public Usuario getUsuario(@PathVariable(value = "id") int id) {
+        return new Usuario("thyago", id);
     }
 }
