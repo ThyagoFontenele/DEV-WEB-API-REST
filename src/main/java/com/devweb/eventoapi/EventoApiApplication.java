@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventoApiApplication {
 
     public static void main(String[] args) {
-            SpringApplication.run(EventoApiApplication.class, args);
+        SpringApplication.run(EventoApiApplication.class, args);
     }
 }
