@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventosController {
 
     @GetMapping
-    public List<Evento> getEventos() {
+    public List<Evento> getAll() {
         return List.of(new Evento(
                 1,
                 "Meu evento",
@@ -29,7 +29,7 @@ public class EventosController {
     }
 
     @GetMapping("/{id}")
-    public Evento getEvento(@PathVariable(value = "id") int id) {
+    public Evento get(@PathVariable(value = "id") int id) {
         return new Evento(
                 id,
                 "Meu evento",

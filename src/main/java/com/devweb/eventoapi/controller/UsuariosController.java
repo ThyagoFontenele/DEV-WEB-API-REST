@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuariosController {
   
     @GetMapping
-    public List<Usuario> getUsuarios() {
+    public List<Usuario> getAll() {
         return List.of(new Usuario("thyago", 1));
     }
     
     @GetMapping("/{id}")
-    public Usuario getUsuario(@PathVariable(value = "id") int id) {
+    public Usuario get(@PathVariable(value = "id") int id) {
         return new Usuario("thyago", id);
     }
 }
