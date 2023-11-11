@@ -1,6 +1,5 @@
 package com.devweb.eventoapi.controller;
 
-import java.util.Date;
 import java.util.List;
 import com.devweb.eventoapi.model.Evento;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +14,7 @@ public class EventosController {
                 1,
                 "Meu evento",
                 "novo evento legal",
-                "NEV",
-                2023,
-                1,
-                new Date(2023,12,1),
-                new Date(2023,12,10),
-                "Rio de Janeiro"
+                "NEV"
                 )
         );
     }
@@ -31,12 +25,7 @@ public class EventosController {
                 id,
                 "Meu evento",
                 "novo evento legal",
-                "NEV",
-                2023,
-                1,
-                new Date(2023,12,1),
-                new Date(2023,12,10),
-                "Rio de Janeiro"
+                "NEV"
         );
     }
 
@@ -47,6 +36,11 @@ public class EventosController {
 
     @DeleteMapping
     public void delete() {
+
+    }
+
+    @PutMapping
+    public void put() {
 
     }
 }

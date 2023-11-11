@@ -40,4 +40,17 @@ public class AtividadesController {
                 new Local(1, "teatro")
         );
     }
+
+    @PostMapping
+    public void post() {
+
+    }
+
+    @PutMapping
+    public void put() {
+
+    }
+
+    @DeleteMapping
+    public void delete(){}
 }

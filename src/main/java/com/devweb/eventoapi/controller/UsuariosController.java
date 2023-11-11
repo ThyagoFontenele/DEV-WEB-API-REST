@@ -23,4 +23,14 @@ public class UsuariosController {
     public void post() {
 
     }
+
+    @DeleteMapping
+    public void delete() {
+
+    }
+
+    @PutMapping
+    public void put() {
+
+    }
 }
