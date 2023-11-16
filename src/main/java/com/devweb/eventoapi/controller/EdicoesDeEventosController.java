@@ -8,7 +8,7 @@ import com.devweb.eventoapi.model.Usuario;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/v1/edicoes")
+@RequestMapping(path = "api/v1/eventos/{eventoId}/edicoes")
 public class EdicoesDeEventosController {
 
     @GetMapping
@@ -38,11 +38,17 @@ public class EdicoesDeEventosController {
     }
 
     @PostMapping
-    public void post() {
+    public void post(@RequestBody Edicao edicao) {
 
     }
-    @PutMapping
-    public void put() {
+
+    @PutMapping("/{id}")
+    public void put(@PathVariable(value = "id") int id, @RequestBody Edicao edicao) {
+
+    }
+
+    @PatchMapping("/{id}/organizador/{usuarioId}")
+    public void patch(@PathVariable(value = "id") int id, @PathVariable(value = "usuarioId") int usuarioId) {
 
     }
 

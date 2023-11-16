@@ -30,12 +30,12 @@ public class EventosController {
     }
 
     @PostMapping
-    public void post() {
+    public void post(@RequestBody Evento evento) {
 
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id) {
+    public void delete(@PathVariable(value = "id") int id, @RequestBody Evento evento) {
 
     }
 

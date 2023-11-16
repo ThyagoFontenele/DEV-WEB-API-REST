@@ -6,7 +6,7 @@ import com.devweb.eventoapi.model.Espaco;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/v1/locais")
+@RequestMapping(path = "api/v1/eventos/{eventoId}/edicoes/{edicaoId}/locais")
 public class EspacosController {
 
     @GetMapping
@@ -23,11 +23,11 @@ public class EspacosController {
     }
 
     @PostMapping
-    public void post() {
+    public void post(@RequestBody Espaco espaco) {
     }
 
-    @PutMapping
-    public void put() {
+    @PutMapping("/{id}")
+    public void put(@PathVariable(value = "id") int id, @RequestBody Espaco espaco) {
     }
 
     @DeleteMapping("/{id}")

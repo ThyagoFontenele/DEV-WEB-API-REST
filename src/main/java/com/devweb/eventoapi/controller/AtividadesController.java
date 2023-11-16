@@ -9,7 +9,7 @@ import com.devweb.eventoapi.model.Espaco;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/v1/atividades")
+@RequestMapping(path = "api/v1/eventos/{eventoId}/edicoes/{edicaoId}/atividades")
 public class AtividadesController {
 
     @GetMapping
@@ -42,15 +42,17 @@ public class AtividadesController {
     }
 
     @PostMapping
-    public void post() {
+    public void post(@RequestBody Atividade atividade) {
 
     }
 
-    @PutMapping
-    public void put() {
+    @PutMapping("/{id}")
+    public void put(@PathVariable(value = "id") int id, @RequestBody Atividade atividade) {
 
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id){}
+    public void delete(@PathVariable(value = "id") int id){
+        
+    }
 }

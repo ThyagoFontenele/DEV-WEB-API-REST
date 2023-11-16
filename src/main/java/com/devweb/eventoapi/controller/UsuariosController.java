@@ -20,7 +20,7 @@ public class UsuariosController {
     }
 
     @PostMapping
-    public void post() {
+    public void post(@RequestBody Usuario usuario) {
 
     }
 
@@ -29,8 +29,8 @@ public class UsuariosController {
 
     }
 
-    @PutMapping
-    public void put() {
+    @PutMapping("/{id}")
+    public void put(@PathVariable(value = "id") int id, @RequestBody Usuario usuario) {
 
     }
 }
