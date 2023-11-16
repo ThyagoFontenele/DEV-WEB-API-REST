@@ -5,6 +5,7 @@ public class Evento {
     public String nome;
     public String descricao;
     public String sigla;
+    public Edicao[] edicoes;
 
     public Evento(
             int id,

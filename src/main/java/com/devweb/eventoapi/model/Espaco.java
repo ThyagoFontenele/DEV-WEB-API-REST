@@ -1,10 +1,14 @@
 package com.devweb.eventoapi.model;
 
-public class Administrador {
+
+public class Espaco {
     public int id;
     public String nome;
+    public String localizacao;
+    public int capacidade;
+    public String[] recursos;
 
-    public Administrador(
+    public Espaco(
             int id,
             String nome
     ) {

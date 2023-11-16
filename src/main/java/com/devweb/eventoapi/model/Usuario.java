@@ -1,11 +1,21 @@
 package com.devweb.eventoapi.model;
 
 public class Usuario {
-    public String nome;
     public int id;
+    public String nome;
+    public String email;
+    public String login;
+    public String afiliacao;
+    public Atividade[] atividadesFavoritas;
+    private boolean isAdmin;
     
-    public Usuario(String nome, int id) {
-        this.nome = nome;
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public Usuario(int id, String nome)  {
         this.id = id;
+        this.nome = nome;
+        this.isAdmin = false;
     }
 }

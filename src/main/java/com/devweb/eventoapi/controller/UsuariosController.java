@@ -11,12 +11,12 @@ public class UsuariosController {
   
     @GetMapping
     public List<Usuario> getAll() {
-        return List.of(new Usuario("thyago", 1));
+        return List.of(new Usuario(1, "thyago"));
     }
     
     @GetMapping("/{id}")
     public Usuario get(@PathVariable(value = "id") int id) {
-        return new Usuario("thyago", id);
+        return new Usuario(id, "thyago");
     }
 
     @PostMapping
@@ -24,8 +24,8 @@ public class UsuariosController {
 
     }
 
-    @DeleteMapping
-    public void delete() {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable(value = "id") int id) {
 
     }
 

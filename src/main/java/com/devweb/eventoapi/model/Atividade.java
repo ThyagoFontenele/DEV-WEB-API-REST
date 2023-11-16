@@ -5,23 +5,24 @@ import java.util.Date;
 
 public class Atividade {
     public int id;
-    public String tipo;
+    public int tipo;
     public String nome;
-    public Local local;
+    public Espaco local;
     public String descricao;
     public Date data;
     public Time horarioInicio;
     public Time horarioFim;
+    public Edicao edicao;
 
     public Atividade(
             int id,
-            String tipo,
+            int tipo,
             String nome,
             String descricao,
             Date data,
             Time horarioInicio,
             Time horarioFim,
-            Local local
+            Espaco local
 
 
     ) {

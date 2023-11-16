@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.devweb.eventoapi.model.Atividade;
-import com.devweb.eventoapi.model.Local;
+import com.devweb.eventoapi.model.Espaco;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +16,13 @@ public class AtividadesController {
     public List<Atividade> getAll() {
         return List.of(new Atividade(
                 1,
-                "palestra",
+                0,
                 "Atividade 1",
                 "primeira palestra",
                 new Date(2023,12,01),
                 new Time(12,30,0),
                 new Time(13,0,0),
-                new Local(1, "teatro")
+                new Espaco(1, "teatro")
                 )
         );
     }
@@ -31,13 +31,13 @@ public class AtividadesController {
     public Atividade get(@PathVariable(value = "id") int id) {
         return new Atividade(
                 id,
-                "palestra",
+                0,
                 "Atividade 1",
                 "primeira palestra",
                 new Date(2023,12,01),
                 new Time(12,30,0),
                 new Time(13,0,0),
-                new Local(1, "teatro")
+                new Espaco(1, "teatro")
         );
     }
 
@@ -51,6 +51,6 @@ public class AtividadesController {
 
     }
 
-    @DeleteMapping
-    public void delete(){}
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable(value = "id") int id){}
 }
