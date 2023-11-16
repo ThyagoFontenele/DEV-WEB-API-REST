@@ -9,7 +9,7 @@ import com.devweb.eventoapi.model.Espaco;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/v1/eventos/{eventoId}/edicoes/{edicaoId}/atividades")
+@RequestMapping(path = "api/v1/edicoes/{edicaoId}/atividades")
 public class AtividadesController {
 
     @GetMapping

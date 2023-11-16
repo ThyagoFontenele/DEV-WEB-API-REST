@@ -24,13 +24,18 @@ public class UsuariosController {
 
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id) {
+    @PutMapping("/{id}")
+    public void put(@PathVariable(value = "id") int id, @RequestBody Usuario usuario) {
+        
+    }
+    
+    @PatchMapping("/{id}/atividadeFavorita/{atividadeId}")
+    public void patch(@PathVariable(value = "id") int id, @PathVariable(value = "atividadeId") int atividadeId) {
 
     }
 
-    @PutMapping("/{id}")
-    public void put(@PathVariable(value = "id") int id, @RequestBody Usuario usuario) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable(value = "id") int id) {
 
     }
 }

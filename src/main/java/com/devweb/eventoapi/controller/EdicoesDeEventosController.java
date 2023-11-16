@@ -13,7 +13,8 @@ public class EdicoesDeEventosController {
 
     @GetMapping
     public List<Edicao> getAll() {
-        return List.of(new Edicao(
+        return List.of(new Edicao
+            (
                 1,
                 "Meu evento",
                 2023,
@@ -21,20 +22,21 @@ public class EdicoesDeEventosController {
                 new Date(2023,12,10),
                 "Rio de Janeiro",
                 new Usuario(1, "name")
-                )
-        );
+            ));
     }
 
     @GetMapping("/{id}")
     public Edicao get(@PathVariable(value = "id") int id) {
-        return new Edicao(
+        return new Edicao
+            (
                 id,
                 "Meu evento",
                 2023,
                 new Date(2023,12,1),
                 new Date(2023,12,10),
                 "Rio de Janeiro",
-                new Usuario(1, "name"));
+                new Usuario(1, "name"
+            ));
     }
 
     @PostMapping

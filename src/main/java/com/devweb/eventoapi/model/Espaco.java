@@ -6,6 +6,7 @@ public class Espaco {
     public String nome;
     public String localizacao;
     public int capacidade;
+    public Edicao edicao;
     public String[] recursos;
 
     public Espaco(
@@ -14,6 +15,5 @@ public class Espaco {
     ) {
         this.id = id;
         this.nome = nome;
-
     }
 }

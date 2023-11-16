@@ -34,13 +34,13 @@ public class EventosController {
 
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id, @RequestBody Evento evento) {
-
-    }
-
     @PutMapping("/{id}")
-    public void put(@PathVariable(value = "id") int id) {
+    public void put(@PathVariable(value = "id") int id, @RequestBody Evento evento) {
+        
+    }
+    
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable(value = "id") int id) {
 
     }
 }

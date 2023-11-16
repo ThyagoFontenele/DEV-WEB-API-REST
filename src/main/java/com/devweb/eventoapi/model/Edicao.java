@@ -1,6 +1,7 @@
 package com.devweb.eventoapi.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Edicao {
     public int id;
@@ -11,7 +12,8 @@ public class Edicao {
     public String cidade;
     public Usuario organizador;
     public Evento evento;
-    public Atividade[] atividades;
+    public List<Atividade> atividades;
+    public List<Espaco> espacos;
 
     public Edicao(
             int id,

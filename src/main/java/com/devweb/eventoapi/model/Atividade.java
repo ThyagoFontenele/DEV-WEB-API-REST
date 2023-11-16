@@ -23,8 +23,6 @@ public class Atividade {
             Time horarioInicio,
             Time horarioFim,
             Espaco local
-
-
     ) {
         this.id = id;
         this.tipo = tipo;
