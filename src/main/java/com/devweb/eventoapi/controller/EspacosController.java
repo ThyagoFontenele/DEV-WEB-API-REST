@@ -18,7 +18,8 @@ public class EspacosController {
     }
 
     @GetMapping("/{id}")
-    public Espaco get(@PathVariable(value = "id") int id) {
+    public Espaco get(@PathVariable(value = "edicaoId") int edicaoId,
+                      @PathVariable(value = "id") int id) {
         return new Espaco(id, "Anfiteatro");
     }
 
@@ -27,11 +28,13 @@ public class EspacosController {
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable(value = "id") int id, @RequestBody Espaco espaco) {
+    public void put(@PathVariable(value = "edicaoId") int edicaoId,
+                    @PathVariable(value = "id") int id, @RequestBody Espaco espaco) {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id) {
+    public void delete(@PathVariable(value = "edicaoId") int edicaoId,
+                       @PathVariable(value = "id") int id) {
 
     }
 }

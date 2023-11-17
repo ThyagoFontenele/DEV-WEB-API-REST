@@ -26,7 +26,8 @@ public class EdicoesController {
     }
 
     @GetMapping("/{id}")
-    public Edicao get(@PathVariable(value = "id") int id) {
+    public Edicao get(@PathVariable(value = "eventoId") int eventoId,
+                      @PathVariable(value = "id") int id) {
         return new Edicao
             (
                 id,
@@ -45,17 +46,21 @@ public class EdicoesController {
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable(value = "id") int id, @RequestBody Edicao edicao) {
+    public void put(@PathVariable(value = "eventoId") int eventoId,
+                    @PathVariable(value = "id") int id, @RequestBody Edicao edicao) {
 
     }
 
     @PatchMapping("/{id}/organizador/{usuarioId}")
-    public void patch(@PathVariable(value = "id") int id, @PathVariable(value = "usuarioId") int usuarioId) {
+    public void patch(@PathVariable(value = "eventoId") int eventoId,
+                      @PathVariable(value = "id") int id,
+                      @PathVariable(value = "usuarioId") int usuarioId) {
 
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id) {
+    public void delete(@PathVariable(value = "eventoId") int eventoId,
+                       @PathVariable(value = "id") int id) {
 
     }
 }

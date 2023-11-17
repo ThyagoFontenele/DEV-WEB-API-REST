@@ -28,7 +28,8 @@ public class AtividadesController {
     }
 
     @GetMapping("/{id}")
-    public Atividade get(@PathVariable(value = "id") int id) {
+    public Atividade get(@PathVariable(value = "edicaoId") int edicaoId,
+                         @PathVariable(value = "id") int id) {
         return new Atividade(
                 id,
                 0,
@@ -47,12 +48,15 @@ public class AtividadesController {
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable(value = "id") int id, @RequestBody Atividade atividade) {
+    public void put(@PathVariable(value = "edicaoId") int edicaoId,
+                    @PathVariable(value = "id") int id,
+                    @RequestBody Atividade atividade) {
 
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id){
+    public void delete(@PathVariable(value = "edicaoId") int edicaoId,
+                       @PathVariable(value = "id") int id) {
         
     }
 }
