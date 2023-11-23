@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  # app: 
+  # app:
   #   image: eventoapi
   #   container_name: evento-app-api
   #   build:
   #     context: .
   #     dockerfile: Dockerfile
   #   volumes:
-  #     - .:/code
+  #     - .:/app
   #   ports:
   #     - "8080:8080"
   #   depends_on:
