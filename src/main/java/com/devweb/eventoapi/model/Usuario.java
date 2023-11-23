@@ -6,18 +6,18 @@ public class Usuario {
     public int id;
     public String nome;
     public String email;
-    public String login;
+    public String senha;
     public String afiliacao;
     public List<Atividade> atividadesFavoritas;
-    private boolean isAdmin;
+    private boolean administrador;
     
-    public boolean isAdmin() {
-        return isAdmin;
+    public boolean isAdministrador() {
+        return administrador;
     }
 
     public Usuario(int id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.isAdmin = false;
+        this.administrador = false;
     }
 }
