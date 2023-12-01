@@ -11,16 +11,13 @@ public class EspacosController {
 
     @GetMapping
     public List<Espaco> getAll() {
-        return List.of(new Espaco(
-                1,
-                "Anfiteatro")
-        );
+        return List.of(new Espaco());
     }
 
     @GetMapping("/{id}")
     public Espaco get(@PathVariable(value = "edicaoId") int edicaoId,
                       @PathVariable(value = "id") int id) {
-        return new Espaco(id, "Anfiteatro");
+        return new Espaco();
     }
 
     @PostMapping

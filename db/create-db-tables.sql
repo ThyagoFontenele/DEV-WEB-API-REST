@@ -13,7 +13,7 @@ CREATE TABLE EventoApi.Usuario (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(100) NOT NULL,
-    afiliacao VARCHAR(200) NOT NULL,
+    afiliacao VARCHAR(100) NOT NULL,
     administrador tinyint(1) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -53,4 +53,20 @@ CREATE TABLE EventoApi.Espaco (
     edicaoId int NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (edicaoId) REFERENCES EventoApi.Edicao(id)
+);
+
+CREATE TABLE EventoApi.UsuariosAtividadesFavoritas (
+  usuarioId int NOT NULL,
+  atividadeId int NOT NULL,
+  PRIMARY KEY (usuarioId, atividadeId),
+  FOREIGN KEY (usuarioId) REFERENCES EventoApi.Usuario(id),
+  FOREIGN KEY (atividadeId) REFERENCES EventoApi.Atividade(id)
+);
+
+CREATE TABLE EventoApi.EspacoRecursos (
+    id int NOT NULL AUTO_INCREMENT,
+    descricao VARCHAR(100) NOT NULL,
+    espacoId int NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (espacoId) REFERENCES EventoApi.Espaco(id)
 );
