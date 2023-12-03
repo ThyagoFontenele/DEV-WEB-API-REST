@@ -1,11 +1,3 @@
-CREATE TABLE eventoapi_db.evento (
-    id int NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL, 
-    descricao VARCHAR(200) NOT NULL,
-    sigla VARCHAR(20) NOT NULL,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE eventoapi_db.usuario (
     id int NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -13,6 +5,14 @@ CREATE TABLE eventoapi_db.usuario (
     senha VARCHAR(100) NOT NULL,
     afiliacao VARCHAR(100) NOT NULL,
     administrador tinyint(1) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE eventoapi_db.evento (
+    id int NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL, 
+    descricao VARCHAR(200) NOT NULL,
+    sigla VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
 );
 

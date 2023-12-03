@@ -14,9 +14,9 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-public class Atividade implements Entidade {
+public class Atividade {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     @Column(nullable = false)
     public int tipo;

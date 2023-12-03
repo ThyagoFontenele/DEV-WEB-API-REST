@@ -5,19 +5,26 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.devweb.eventoapi.entities.Espaco;
+import com.devweb.eventoapi.services.EspacoService;
 
 @RestController
 @RequestMapping(path = "api/v1/edicoes/{edicaoId}/espacos")
 public class EspacosController {
 
+    private final EspacoService espacoService;
+
+    public EspacosController(EspacoService espacoService) {
+        this.espacoService = espacoService;
+    }
+
     @GetMapping
     public List<Espaco> getAll() {
-        return List.of(new Espaco());
+        return espacoService.getAll();
     }
 
     @GetMapping("/{id}")
     public Espaco get(@PathVariable(value = "edicaoId") int edicaoId,
-                      @PathVariable(value = "id") int id) {
+                      @PathVariable(value = "id") Long id) {
         return new Espaco();
     }
 
@@ -27,12 +34,12 @@ public class EspacosController {
 
     @PutMapping("/{id}")
     public void put(@PathVariable(value = "edicaoId") int edicaoId,
-                    @PathVariable(value = "id") int id, @RequestBody Espaco espaco) {
+                    @PathVariable(value = "id") Long id, @RequestBody Espaco espaco) {
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable(value = "edicaoId") int edicaoId,
-                       @PathVariable(value = "id") int id) {
+                       @PathVariable(value = "id") Long id) {
 
     }
 }

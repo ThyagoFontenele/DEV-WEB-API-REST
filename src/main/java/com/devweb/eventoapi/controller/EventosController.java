@@ -5,18 +5,25 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.devweb.eventoapi.entities.Evento;
+import com.devweb.eventoapi.services.EventoService;
 
 @RestController
 @RequestMapping(path = "api/v1/eventos")
 public class EventosController {
 
+    private final EventoService eventoService;
+
+    public EventosController(EventoService eventoService) {
+        this.eventoService = eventoService;
+    }
+
     @GetMapping
     public List<Evento> getAll() {
-        return List.of(new Evento());
+        return eventoService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Evento get(@PathVariable(value = "id") int id) {
+    public Evento get(@PathVariable(value = "id") Long id) {
         return new Evento();
     }
 
@@ -26,12 +33,12 @@ public class EventosController {
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable(value = "id") int id, @RequestBody Evento evento) {
+    public void put(@PathVariable(value = "id") Long id, @RequestBody Evento evento) {
         
     }
     
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") int id) {
+    public void delete(@PathVariable(value = "id") Long id) {
 
     }
 }
