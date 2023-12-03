@@ -1,6 +1,7 @@
 package com.devweb.eventoapi.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +14,8 @@ public class BaseEntityService<T> {
         this.repository = repository;
     }
 
-    public T getById(Long id) {
-        return repository.getReferenceById(id);
+    public Optional<T> getById(Long id) {
+        return repository.findById(id);
     }
 
     public List<T> getAll() {

@@ -23,10 +23,10 @@ CREATE TABLE eventoapi_db.edicao (
     data_final datetime NOT NULL,
     cidade VARCHAR(100) NOT NULL,
     evento_id int NOT NULL,
-    organizador_id int NULL,
+    usuario_id int NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (evento_id) REFERENCES eventoapi_db.evento(id),
-    FOREIGN KEY (organizador_id) REFERENCES eventoapi_db.usuario(id)
+    FOREIGN KEY (usuario_id) REFERENCES eventoapi_db.usuario(id)
 );
 
 CREATE TABLE eventoapi_db.espaco (
@@ -45,8 +45,8 @@ CREATE TABLE eventoapi_db.atividade (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     data date NOT NULL,
-    horario_inicial time NOT NULL,
-    horario_final time NOT NULL,
+    horario_inicio time NOT NULL,
+    horario_fim time NOT NULL,
     edicao_id int NOT NULL,
     espaco_id int NOT NULL,
     PRIMARY KEY (id),

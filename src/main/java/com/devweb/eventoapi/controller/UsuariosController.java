@@ -5,6 +5,7 @@ import com.devweb.eventoapi.repositories.UsuarioRepository;
 import com.devweb.eventoapi.services.UsuarioService;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class UsuariosController {
     }
     
     @GetMapping("/{id}")
-    public Usuario get(@PathVariable(value = "id") Long id) {
+    public Optional<Usuario> get(@PathVariable(value = "id") Long id) {
         return usuarioService.getById(id);
     }
 

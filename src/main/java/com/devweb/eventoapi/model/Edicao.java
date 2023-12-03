@@ -22,8 +22,6 @@ public class Edicao implements Entidade {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
     @Column(nullable = false)
-    public String nome;
-    @Column(nullable = false)
     public int ano;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
