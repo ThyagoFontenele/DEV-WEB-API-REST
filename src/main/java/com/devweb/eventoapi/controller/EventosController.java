@@ -10,23 +10,12 @@ public class EventosController {
 
     @GetMapping
     public List<Evento> getAll() {
-        return List.of(new Evento(
-                1,
-                "Meu evento",
-                "novo evento legal",
-                "NEV"
-                )
-        );
+        return List.of(new Evento());
     }
 
     @GetMapping("/{id}")
     public Evento get(@PathVariable(value = "id") int id) {
-        return new Evento(
-                id,
-                "Meu evento",
-                "novo evento legal",
-                "NEV"
-        );
+        return new Evento();
     }
 
     @PostMapping
