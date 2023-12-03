@@ -1,8 +1,10 @@
 package com.devweb.eventoapi.controller;
 
 import java.util.List;
-import com.devweb.eventoapi.model.Evento;
+
 import org.springframework.web.bind.annotation.*;
+
+import com.devweb.eventoapi.entities.Evento;
 
 @RestController
 @RequestMapping(path = "api/v1/eventos")

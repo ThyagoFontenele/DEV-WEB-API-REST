@@ -1,4 +1,4 @@
-package com.devweb.eventoapi.model;
+package com.devweb.eventoapi.entities;
 
 import java.util.List;
 
@@ -10,27 +10,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Espaco implements Entidade {
+public class Evento implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
     @Column(nullable = false, length = 100)
     public String nome;
-    @Column(nullable = false, length = 100)
-    public String localizacao;
-    @Column(nullable = false)
-    public int capacidade;
-    @ManyToOne
-    @JoinColumn(name = "edicao_id")
-    public Edicao edicao;
-    @OneToMany(targetEntity = Recurso.class, cascade = CascadeType.REMOVE)
+    @Column(nullable = false, length = 200)
+    public String descricao;
+    @Column(nullable = false, length = 20)
+    public String sigla;
+    @OneToMany(targetEntity = Edicao.class, cascade = CascadeType.REMOVE)
     @JoinTable(
-        name="espaco_recursos",
-        joinColumns = @JoinColumn(name = "espaco_id"), 
+        name="edicao",
+        joinColumns = @JoinColumn(name = "evento_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
-    public List<Recurso> recursos;
+    public List<Edicao> edicoes;
 }

@@ -1,9 +1,10 @@
 package com.devweb.eventoapi.controller;
 
 import java.util.List;
-import com.devweb.eventoapi.model.Edicao;
 
 import org.springframework.web.bind.annotation.*;
+
+import com.devweb.eventoapi.entities.Edicao;
 
 @RestController
 @RequestMapping(path = "api/v1/eventos/{eventoId}/edicoes")
