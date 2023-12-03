@@ -1,0 +1,5 @@
+docker compose up
+JDK VERSAO 17
+com o conteiner iniciado:
+    mvn clean install
+    mvn spring-boot:run

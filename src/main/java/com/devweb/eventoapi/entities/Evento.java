@@ -13,9 +13,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Evento implements Entidade {
+public class Evento  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     @Column(nullable = false, length = 100)
     public String nome;

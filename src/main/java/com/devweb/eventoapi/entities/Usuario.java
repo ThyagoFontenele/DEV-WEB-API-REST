@@ -2,6 +2,7 @@ package com.devweb.eventoapi.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,9 +14,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Usuario implements Entidade {
+public class Usuario  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     @Column(nullable = false, length = 100)
     public String nome;
@@ -27,6 +28,7 @@ public class Usuario implements Entidade {
     public String afiliacao;
     @Column(nullable = false)
     private boolean administrador;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
         name="usuarios_atividades_favoritas",

@@ -2,6 +2,8 @@ package com.devweb.eventoapi.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,9 +16,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Espaco implements Entidade {
+public class Espaco  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     @Column(nullable = false, length = 100)
     public String nome;
@@ -24,6 +26,7 @@ public class Espaco implements Entidade {
     public String localizacao;
     @Column(nullable = false)
     public int capacidade;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "edicao_id")
     public Edicao edicao;
