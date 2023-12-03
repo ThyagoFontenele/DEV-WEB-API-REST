@@ -1,7 +1,6 @@
 package com.devweb.eventoapi.controller;
 
-import com.devweb.eventoapi.model.Usuario;
-import com.devweb.eventoapi.repositories.UsuarioRepository;
+import com.devweb.eventoapi.entities.Usuario;
 import com.devweb.eventoapi.services.UsuarioService;
 
 import java.util.List;
