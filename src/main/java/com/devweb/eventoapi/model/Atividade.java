@@ -14,7 +14,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-public class Atividade {
+public class Atividade implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -22,8 +22,6 @@ public class Atividade {
     public int tipo;
     @Column(nullable = false, length = 100)
     public String nome;
-    @Column(nullable = false, length = 100)
-    public Espaco local;
     @Column(nullable = false, length = 100)
     public String descricao;
     @Temporal(TemporalType.DATE)
@@ -35,6 +33,9 @@ public class Atividade {
     @Temporal(TemporalType.TIME)
     public Time horarioFim;
     @ManyToOne
-    @JoinColumn(name = "edicaoId")
+    @JoinColumn(name = "espaco_id")
+    public Espaco local;
+    @ManyToOne
+    @JoinColumn(name = "edicao_id")
     public Edicao edicao;
 }

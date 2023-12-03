@@ -14,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Espaco {
+public class Espaco implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -25,12 +25,12 @@ public class Espaco {
     @Column(nullable = false)
     public int capacidade;
     @ManyToOne
-    @JoinColumn(name = "edicaoId")
+    @JoinColumn(name = "edicao_id")
     public Edicao edicao;
-    @OneToMany(targetEntity = Recursos.class, cascade = CascadeType.REMOVE)
+    @OneToMany(targetEntity = Recurso.class, cascade = CascadeType.REMOVE)
     @JoinTable(
-        name="EspacoRecursos",
-        joinColumns = @JoinColumn(name = "espacoId"), 
+        name="espaco_recursos",
+        joinColumns = @JoinColumn(name = "espaco_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
-    public List<Recursos> recursos;
+    public List<Recurso> recursos;
 }

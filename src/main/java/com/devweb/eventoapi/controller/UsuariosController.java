@@ -2,23 +2,32 @@ package com.devweb.eventoapi.controller;
 
 import com.devweb.eventoapi.model.Usuario;
 import com.devweb.eventoapi.repositories.UsuarioRepository;
+import com.devweb.eventoapi.services.UsuarioService;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/usuarios")
 public class UsuariosController {
 
+    private final UsuarioService usuarioService;
+
+    @Autowired
+    public UsuariosController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
     @GetMapping
     public List<Usuario> getAll() {
-        return List.of(new Usuario());
+        return usuarioService.getAll();
     }
     
     @GetMapping("/{id}")
-    public Usuario get(@PathVariable(value = "id") int id) {
-        return new Usuario();
+    public Usuario get(@PathVariable(value = "id") Long id) {
+        return usuarioService.getById(id);
     }
 
     @PostMapping
@@ -31,7 +40,7 @@ public class UsuariosController {
         
     }
     
-    @PatchMapping("/{id}/atividadeFavorita/{atividadeId}")
+    @PatchMapping("/{id}/atividadesFavoritas/{atividadeId}")
     public void patch(@PathVariable(value = "id") int id, @PathVariable(value = "atividadeId") int atividadeId) {
 
     }

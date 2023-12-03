@@ -17,7 +17,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-public class Edicao {
+public class Edicao implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -33,21 +33,22 @@ public class Edicao {
     public Date dataFinal;
     @Column(nullable = false, length = 100)
     public String cidade;
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
     public Usuario organizador;
     @ManyToOne
-    @JoinColumn(name = "eventoId")
+    @JoinColumn(name = "evento_id")
     public Evento evento;
     @OneToMany(targetEntity = Atividade.class, cascade = CascadeType.REMOVE)
     @JoinTable(
-        name="Atividade",
-        joinColumns = @JoinColumn(name = "edicaoId"), 
+        name="atividade",
+        joinColumns = @JoinColumn(name = "edicao_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
     public List<Atividade> atividades;
     @OneToMany(targetEntity = Espaco.class, cascade = CascadeType.REMOVE)
     @JoinTable(
-        name="Espaco",
-        joinColumns = @JoinColumn(name = "edicaoId"), 
+        name="espaco",
+        joinColumns = @JoinColumn(name = "edicao_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
     public List<Espaco> espacos;
 }

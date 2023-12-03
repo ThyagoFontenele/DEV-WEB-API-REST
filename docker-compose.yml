@@ -1,25 +1,14 @@
 version: '3.8'
 
 services:
-  # app:
-  #   image: eventoapi
-  #   container_name: evento-app-api
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - .:/app
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - db
-
   db:
-    container_name: mysql-db-eventoapi
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    container_name: mysql-db-api
+    image: mysql:8.0.35
     environment:
+      MYSQL_DATABASE: eventoapi_db
       MYSQL_ROOT_PASSWORD: eventoApi123
     ports:
       - "3306:3306"
+    volumes:
+      - "./db/create-db-tables.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./db/init.sql:/docker-entrypoint-initdb.d/2.sql"

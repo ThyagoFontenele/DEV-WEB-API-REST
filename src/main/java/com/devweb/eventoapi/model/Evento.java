@@ -13,7 +13,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Evento {
+public class Evento implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -25,8 +25,8 @@ public class Evento {
     public String sigla;
     @OneToMany(targetEntity = Edicao.class, cascade = CascadeType.REMOVE)
     @JoinTable(
-        name="Edicao",
-        joinColumns = @JoinColumn(name = "eventoId"), 
+        name="edicao",
+        joinColumns = @JoinColumn(name = "evento_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
     public List<Edicao> edicoes;
 }

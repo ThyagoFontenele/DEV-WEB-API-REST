@@ -9,13 +9,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Recursos {
+public class Recurso implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
     @Column(nullable = false, length = 100)
     public String descricao;
     @ManyToOne
-    @JoinColumn(name = "espacoId")
+    @JoinColumn(name = "espaco_id")
     public Espaco espaco;
 }

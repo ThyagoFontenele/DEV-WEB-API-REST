@@ -13,7 +13,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Usuario {
+public class Usuario implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -29,9 +29,9 @@ public class Usuario {
     private boolean administrador;
     @ManyToMany
     @JoinTable(
-        name="UsuariosAtividadesFavoritas",
-        joinColumns = @JoinColumn(name = "usuarioId"), 
-        inverseJoinColumns = @JoinColumn(name = "atividadeId"))
+        name="usuarios_atividades_favoritas",
+        joinColumns = @JoinColumn(name = "usuario_id"), 
+        inverseJoinColumns = @JoinColumn(name = "atividade_id"))
     public List<Atividade> atividadesFavoritas;
     
     public boolean isAdministrador() {
