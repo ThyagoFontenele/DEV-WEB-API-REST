@@ -2,7 +2,6 @@ package com.devweb.eventoapi.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,24 +17,29 @@ public class Usuario  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     @Column(nullable = false, length = 100)
     public String nome;
+    
     @Column(nullable = false, length = 100)
     public String email;
+
     @Column(nullable = false, length = 100)
     public String senha;
+    
     @Column(nullable = false, length = 100)
     public String afiliacao;
+
     @Column(nullable = false)
-    private boolean administrador;
-    @JsonIgnore
+    private boolean administrador = false;
+
     @ManyToMany
     @JoinTable(
         name="usuarios_atividades_favoritas",
         joinColumns = @JoinColumn(name = "usuario_id"), 
         inverseJoinColumns = @JoinColumn(name = "atividade_id"))
     public List<Atividade> atividadesFavoritas;
-    
+
     public boolean isAdministrador() {
         return administrador;
     }

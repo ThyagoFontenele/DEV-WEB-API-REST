@@ -23,23 +23,30 @@ public class Edicao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     @Column(nullable = false)
     public int ano;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     public Date dataInicial;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     public Date dataFinal;
+
     @Column(nullable = false, length = 100)
     public String cidade;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     public Usuario organizador;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evento_id")
     public Evento evento;
+
     @JsonIgnore
     @OneToMany(targetEntity = Atividade.class, cascade = CascadeType.REMOVE)
     @JoinTable(
@@ -47,6 +54,7 @@ public class Edicao {
         joinColumns = @JoinColumn(name = "edicao_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
     public List<Atividade> atividades;
+
     @JsonIgnore
     @OneToMany(targetEntity = Espaco.class, cascade = CascadeType.REMOVE)
     @JoinTable(
