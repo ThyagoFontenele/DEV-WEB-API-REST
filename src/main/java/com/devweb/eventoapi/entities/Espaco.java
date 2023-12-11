@@ -20,16 +20,21 @@ public class Espaco  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     @Column(nullable = false, length = 100)
     public String nome;
+
     @Column(nullable = false, length = 100)
     public String localizacao;
+
     @Column(nullable = false)
     public int capacidade;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "edicao_id")
     public Edicao edicao;
+    
     @OneToMany(targetEntity = Recurso.class, cascade = CascadeType.REMOVE)
     @JoinTable(
         name="espaco_recursos",

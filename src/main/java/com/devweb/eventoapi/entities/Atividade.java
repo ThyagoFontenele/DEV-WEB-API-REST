@@ -3,6 +3,8 @@ package com.devweb.eventoapi.entities;
 import java.sql.Time;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,23 +20,32 @@ public class Atividade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     @Column(nullable = false)
     public int tipo;
+
     @Column(nullable = false, length = 100)
     public String nome;
+
     @Column(nullable = false, length = 100)
     public String descricao;
+
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     public Date data;
+
     @Temporal(TemporalType.TIME)
     @Column(nullable = false)
     public Time horarioInicio;
+
     @Temporal(TemporalType.TIME)
     public Time horarioFim;
+
     @ManyToOne
     @JoinColumn(name = "espaco_id")
     public Espaco local;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "edicao_id")
     public Edicao edicao;
