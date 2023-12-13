@@ -1,7 +1,7 @@
 CREATE TABLE eventoapi_db.usuario (
     id int NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(100) NOT NULL,
     afiliacao VARCHAR(100) NOT NULL,
     administrador tinyint(1) NOT NULL,

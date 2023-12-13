@@ -1,17 +1,23 @@
 package com.devweb.eventoapi.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.devweb.eventoapi.entities.Usuario;
+import com.devweb.eventoapi.model.Login;
 import com.devweb.eventoapi.model.ValidationResult;
 import com.devweb.eventoapi.repositories.UsuarioRepository;
 
 @Service
-public class UsuarioService extends BaseEntityService<Usuario> {
-    
+public class UsuarioService {
+
+    private final UsuarioRepository usuarioRepository;
+
     public UsuarioService(UsuarioRepository usuarioRepository) {
-        super(usuarioRepository);
+        this.usuarioRepository = usuarioRepository;
     }
 
     public ValidationResult saveOrUpdate(Usuario usuario) {
@@ -27,7 +33,27 @@ public class UsuarioService extends BaseEntityService<Usuario> {
             return new ValidationResult("u dont have permission for administrador true", HttpStatus.METHOD_NOT_ALLOWED);
         }
 
-        this.repository.save(usuario);
+        this.usuarioRepository.save(usuario);
         return new ValidationResult();
+    }
+
+    public Optional<Usuario> login(Login login) {
+        return usuarioRepository.findByEmail(login.email);
+    }
+
+    public Optional<Usuario> getById(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
+    public List<Usuario> getAll() {
+        return usuarioRepository.findAll();
+    }
+
+    public void save(Usuario entity) {
+        usuarioRepository.save(entity);
+    }
+
+    public void delete(Usuario entity) {
+        usuarioRepository.delete(entity);
     }
 }
