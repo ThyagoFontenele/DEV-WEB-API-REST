@@ -3,21 +3,25 @@ package com.devweb.eventoapi.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.devweb.eventoapi.entities.Evento;
 import com.devweb.eventoapi.model.ValidationResult;
 import com.devweb.eventoapi.services.EventoService;
+import com.devweb.eventoapi.services.UsuarioService;
 
 @RestController
 @ResponseBody
 @RequestMapping(path = "api/v1/eventos")
-public class EventosController {
+public class EventosController extends AuthController {
 
     private final EventoService eventoService;
 
-    public EventosController(EventoService eventoService) {
+    public EventosController(EventoService eventoService, UsuarioService usuarioService) {
+        super(usuarioService);
         this.eventoService = eventoService;
     }
 
@@ -36,7 +40,11 @@ public class EventosController {
     }
 
     @PostMapping
-    public ResponseEntity post(@RequestBody Evento evento) {
+    public ResponseEntity post(@CookieValue("userId") Long userId, @RequestBody Evento evento) {
+        if (!isUserAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+        }
+
         ValidationResult validationResult  = eventoService.saveOrUpdate(evento);
 
         return validationResult.isValid() 
@@ -45,7 +53,11 @@ public class EventosController {
     }
 
     @PutMapping
-    public ResponseEntity put(@RequestBody Evento evento) {
+    public ResponseEntity put(@CookieValue("userId") Long userId, @RequestBody Evento evento) {
+        if (!isUserAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+        }
+
         if (evento.id == null) {
             return ResponseEntity.unprocessableEntity().body("id field is required for this");
         }
@@ -64,7 +76,11 @@ public class EventosController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(value = "id") Long id) {
+    public ResponseEntity delete(@CookieValue("userId") Long userId, @PathVariable(value = "id") Long id) {
+        if (!isUserAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+        }
+        
         Optional<Evento> evento = eventoService.getById(id);
 
         if (evento.isPresent()) {

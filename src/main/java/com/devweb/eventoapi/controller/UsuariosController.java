@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @ResponseBody
 @RequestMapping(path = "api/v1/usuarios")
-public class UsuariosController {
+public class UsuariosController extends AuthController {
 
     private final UsuarioService usuarioService;
     private final AtividadeService atividadeService;
 
     public UsuariosController(UsuarioService usuarioService,
                               AtividadeService atividadeService) {
+        super(usuarioService);
         this.usuarioService = usuarioService;
         this.atividadeService = atividadeService;
     }
