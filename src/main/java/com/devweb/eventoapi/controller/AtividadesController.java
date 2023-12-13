@@ -6,14 +6,16 @@ import org.springframework.web.bind.annotation.*;
 
 import com.devweb.eventoapi.entities.Atividade;
 import com.devweb.eventoapi.services.AtividadeService;
+import com.devweb.eventoapi.services.UsuarioService;
 
 @RestController
 @RequestMapping(path = "api/v1/edicoes/{edicaoId}/atividades")
-public class AtividadesController {
+public class AtividadesController extends AuthController {
 
     private final AtividadeService atividadeService;
 
-    public AtividadesController(AtividadeService atividadeService) {
+    public AtividadesController(AtividadeService atividadeService, UsuarioService usuarioService) {
+        super(usuarioService);
         this.atividadeService = atividadeService;
     }
 
