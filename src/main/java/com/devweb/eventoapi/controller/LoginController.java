@@ -31,12 +31,11 @@ public class LoginController {
     public ResponseEntity get(HttpServletResponse response, @RequestBody Login login) {
         Optional<Usuario> usuario = usuarioService.login(login);
         
-        if (usuario.isPresent() && login.senha.equals(usuario.get().senha)) {
-            Usuario user = usuario.get();
-            response.addCookie(new Cookie("authUserId", user.id.toString()));
-            return ResponseEntity.ok().build();
+        if (!usuario.isPresent() || !login.senha.equals(usuario.get().senha)) {
+            return ResponseEntity.badRequest().body("Email e/ou senha incorreto");
         }
 
-        return ResponseEntity.badRequest().body("Email e/ou senha incorreto");
+        response.addCookie(new Cookie("authUserId", usuario.get().id.toString()));
+        return ResponseEntity.ok().build();
     }
 }
