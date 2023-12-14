@@ -33,8 +33,8 @@ public class LoginController {
         
         if (usuario.isPresent() && login.senha.equals(usuario.get().senha)) {
             Usuario user = usuario.get();
-            response.addCookie(new Cookie("userId", user.id.toString()));
-            ResponseEntity.ok().build();
+            response.addCookie(new Cookie("authUserId", user.id.toString()));
+            return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.badRequest().body("Email e/ou senha incorreto");
