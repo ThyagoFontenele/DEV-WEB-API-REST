@@ -40,7 +40,7 @@ public class EventosController extends AuthController {
     }
 
     @PostMapping
-    public ResponseEntity post(@CookieValue("userId") Long userId, @RequestBody Evento evento) {
+    public ResponseEntity post(@CookieValue("authUserId") Long userId, @RequestBody Evento evento) {
         if (!isUserAdmin(userId)) {
             return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
@@ -53,7 +53,7 @@ public class EventosController extends AuthController {
     }
 
     @PutMapping
-    public ResponseEntity put(@CookieValue("userId") Long userId, @RequestBody Evento evento) {
+    public ResponseEntity put(@CookieValue("authUserId") Long userId, @RequestBody Evento evento) {
         if (!isUserAdmin(userId)) {
             return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
@@ -76,7 +76,7 @@ public class EventosController extends AuthController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@CookieValue("userId") Long userId, @PathVariable(value = "id") Long id) {
+    public ResponseEntity delete(@CookieValue("authUserId") Long userId, @PathVariable(value = "id") Long id) {
         if (!isUserAdmin(userId)) {
             return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
