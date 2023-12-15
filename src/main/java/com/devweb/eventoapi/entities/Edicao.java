@@ -62,4 +62,9 @@ public class Edicao {
         joinColumns = @JoinColumn(name = "edicao_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
     public List<Espaco> espacos;
+
+
+    public Long getEdicaoId() {
+      return this.id;
+  }
 }

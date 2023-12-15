@@ -41,4 +41,60 @@ public class Espaco  {
         joinColumns = @JoinColumn(name = "espaco_id"), 
         inverseJoinColumns = @JoinColumn(name = "id"))
     public List<Recurso> recursos;
+
+
+     // Getters
+    public Long getId() {
+      return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public Edicao getEdicao() {
+        return edicao;
+    }
+
+     public Long getEdicaoId() {
+        return edicao.id;
+    }
+
+    public List<Recurso> getRecursos() {
+        return recursos;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public void setEdicao(Edicao edicao) {
+        this.edicao = edicao;
+    }
+
+    public void setRecursos(List<Recurso> recursos) {
+        this.recursos = recursos;
+    }
+
 }
