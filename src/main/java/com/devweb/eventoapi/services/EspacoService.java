@@ -7,18 +7,22 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.devweb.eventoapi.services.EdicaoService;
+import com.devweb.eventoapi.entities.Atividade;
 import com.devweb.eventoapi.entities.Espaco;
 import com.devweb.eventoapi.entities.Usuario;
 import com.devweb.eventoapi.model.ValidationResult;
+import com.devweb.eventoapi.repositories.AtividadeRepository;
 import com.devweb.eventoapi.repositories.EspacoRepository;
 
 @Service
 public class EspacoService {
     
     private final EspacoRepository espacoRepository;
+    private final AtividadeRepository atividadeRepository;
 
-    public EspacoService(EspacoRepository espacoRepository) {
+    public EspacoService(EspacoRepository espacoRepository, AtividadeRepository atividadeRepository) {
         this.espacoRepository = espacoRepository;
+        this.atividadeRepository = atividadeRepository;
     }
 
     public ValidationResult saveOrUpdate(Espaco espaco) {
@@ -40,6 +44,11 @@ public class EspacoService {
 
     public Optional<Espaco> getById(Long id) {
         return espacoRepository.findById(id);
+    }
+
+    public boolean isEspacoAssociadoComAtividades(Espaco espaco) {
+       List<Atividade> atividadesAssociadas = atividadeRepository.findByLocal(espaco);
+        return !atividadesAssociadas.isEmpty();
     }
 
     public List<Espaco> getAll() {

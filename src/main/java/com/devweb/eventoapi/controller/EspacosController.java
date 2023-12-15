@@ -78,13 +78,47 @@ public class EspacosController extends AuthController {
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable(value = "edicaoId") Long edicaoId,
-                    @PathVariable(value = "id") Long id, @RequestBody Espaco espaco) {
+     public ResponseEntity put(@RequestBody EspacosDTO espacoDTO, @PathVariable(value = "id") Long id) {
+      Espaco espaco = espacoService.getById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Espaço não encontrado"));
+      espaco.setNome(espacoDTO.getNome());
+      espaco.setLocalizacao(espacoDTO.getLocalizacao());
+      espaco.setCapacidade(espacoDTO.getCapacidade());
+
+      
+      if (espacoDTO.getEdicaoId() != null) {
+        Optional<Edicao> edicaoOptional = edicaoService.getById(espacoDTO.getEdicaoId());
+    
+        if (edicaoOptional.isPresent()) {
+            Edicao edicao = edicaoOptional.get();
+            espaco.setEdicao(edicao);
+        } else {
+          return ResponseEntity
+          .status(HttpStatus.NOT_FOUND)
+          .body("Edição com ID " + espacoDTO.getEdicaoId() + " não encontrada");
+        }
+      }
+        ValidationResult validationResult  = espacoService.saveOrUpdate(espaco);
+
+        return validationResult.isValid() 
+            ? ResponseEntity.ok(espaco)
+            : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "edicaoId") Long edicaoId,
-                       @PathVariable(value = "id") Long id) {
-
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+        try {
+            Espaco espaco = espacoService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Espaço não encontrado"));
+            if (!espacoService.isEspacoAssociadoComAtividades(espaco)) {
+              espacoService.delete(espaco);
+              return ResponseEntity.ok("Espaço deletado com sucesso");
+          } else {
+            throw new IllegalStateException("O espaço está associado a uma ou mais atividades e não pode ser deletado");          }
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }
