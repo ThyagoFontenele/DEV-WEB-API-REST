@@ -1,11 +1,12 @@
 package com.devweb.eventoapi.services;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.devweb.eventoapi.entities.Recurso;
 import com.devweb.eventoapi.repositories.RecursoRepository;
 
+@Service
 public class RecursoService {
     
     private final RecursoRepository recursoRepository;

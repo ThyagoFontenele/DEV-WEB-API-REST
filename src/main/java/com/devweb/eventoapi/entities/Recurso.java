@@ -25,4 +25,24 @@ public class Recurso  {
     @ManyToOne
     @JoinColumn(name = "espaco_id")
     public Espaco espaco;
+
+    public Espaco getEspaco() {
+      return espaco;
+    }
+    
+    public String getDescricao() {
+      return descricao;
+    }
+
+    public Long getId() {
+      return id;
+    }
+
+    public void setDescricao(String descricao) {
+      this.descricao = descricao;
+    }
+
+    public void setEspaco(Espaco espaco) {
+      this.espaco = espaco;
+    }
 }

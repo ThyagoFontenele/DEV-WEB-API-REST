@@ -52,29 +52,35 @@ public class EspacosController extends AuthController {
 
     @PostMapping
     public ResponseEntity post(@RequestBody EspacosDTO espacoDTO) {
-      Espaco espaco = new Espaco();
-      espaco.setNome(espacoDTO.getNome());
-      espaco.setLocalizacao(espacoDTO.getLocalizacao());
-      espaco.setCapacidade(espacoDTO.getCapacidade());
+      try {
+          Espaco espaco = new Espaco();
+          espaco.setNome(espacoDTO.getNome());
+          espaco.setLocalizacao(espacoDTO.getLocalizacao());
+          espaco.setCapacidade(espacoDTO.getCapacidade());
 
       
-      if (espacoDTO.getEdicaoId() != null) {
-        Optional<Edicao> edicaoOptional = edicaoService.getById(espacoDTO.getEdicaoId());
-    
-        if (edicaoOptional.isPresent()) {
-            Edicao edicao = edicaoOptional.get();
-            espaco.setEdicao(edicao);
-        } else {
-          return ResponseEntity
-          .status(HttpStatus.NOT_FOUND)
-          .body("Edição com ID " + espacoDTO.getEdicaoId() + " não encontrada");
-        }
-      }
-        ValidationResult validationResult  = espacoService.saveOrUpdate(espaco);
+          if (espacoDTO.getEdicaoId() != null) {
+            Optional<Edicao> edicaoOptional = edicaoService.getById(espacoDTO.getEdicaoId());
+        
+            if (edicaoOptional.isPresent()) {
+                Edicao edicao = edicaoOptional.get();
+                espaco.setEdicao(edicao);
+            } else {
+              return ResponseEntity
+              .status(HttpStatus.NOT_FOUND)
+              .body("Edição com ID " + espacoDTO.getEdicaoId() + " não encontrada");
+            }
+          }
+            ValidationResult validationResult  = espacoService.saveOrUpdate(espaco);
 
         return validationResult.isValid() 
             ? ResponseEntity.ok(espaco)
             : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
+      } catch (EntityNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+      } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a solicitação");
+      }
     }
 
     @PutMapping("/{id}")
