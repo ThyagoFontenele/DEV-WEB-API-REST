@@ -9,18 +9,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.devweb.eventoapi.entities.Atividade;
+import com.devweb.eventoapi.entities.Edicao;
 import com.devweb.eventoapi.model.ValidationResult;
 import com.devweb.eventoapi.services.UsuarioService;
 import com.devweb.eventoapi.services.AtividadeService;
+import com.devweb.eventoapi.services.EdicaoService;
 
 @RestController
 @RequestMapping(path = "api/v1/edicoes/{edicaoId}/atividades")
 public class AtividadesController extends AuthController {
 
     private final AtividadeService atividadeService;
+    private final EdicaoService edicaoService;
 
-    public AtividadesController(AtividadeService atividadeService, UsuarioService usuarioService) {
+    public AtividadesController(EdicaoService edicaoService,
+                                AtividadeService atividadeService,
+                                UsuarioService usuarioService) {
         super(usuarioService);
+        this.edicaoService = edicaoService;
         this.atividadeService = atividadeService;
     }
 
@@ -51,22 +57,36 @@ public class AtividadesController extends AuthController {
             ResponseEntity.notFound().build();
         }
 
-        return atividade.isPresent() ?
-                ResponseEntity.ok(atividade.get()) :
-                ResponseEntity.notFound().build();
+        return atividade.isPresent() 
+            ?   ResponseEntity.ok(atividade.get()) 
+            : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity post(@RequestBody Atividade atividade) {
+    public ResponseEntity post(@PathVariable(value = "edicaoId") Long edicaoId, 
+                               @CookieValue("authUserId") Long userId, 
+                               @RequestBody Atividade atividade) {
+    
+        Optional<Edicao> edicao = edicaoService.getById(edicaoId);
+
+        if (!edicao.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (!edicao.get().organizador.id.equals(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+        }
+
         ValidationResult validationResult  = atividadeService.saveOrUpdate(atividade);
 
         return validationResult.isValid()
-                ? ResponseEntity.ok(atividade)
-                : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
+            ? ResponseEntity.ok(atividade)
+            : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity put(@PathVariable(value = "edicaoId") Long edicaoId,
+    public ResponseEntity put(@CookieValue("authUserId") Long userId,
+                              @PathVariable(value = "edicaoId") Long edicaoId,
                               @PathVariable(value = "id") Long id,
                               @RequestBody Atividade atividade) {
 
@@ -80,24 +100,33 @@ public class AtividadesController extends AuthController {
 
         Optional<Atividade> atividadePersistida = atividadeService.getById(atividade.id);
 
-        if (atividadePersistida.isEmpty()) {
+        if (!atividadePersistida.isPresent()) {
             return ResponseEntity.notFound().build();
+        }
+
+        if (!atividadePersistida.get().edicao.organizador.id.equals(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
 
         ValidationResult validationResult = atividadeService.saveOrUpdate(atividade);
 
         return validationResult.isValid()
-                ? ResponseEntity.ok(atividade)
-                : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
+            ? ResponseEntity.ok(atividade)
+            : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(value = "edicaoId") Long edicaoId,
+    public ResponseEntity delete(@CookieValue("authUserId") Long userId,
+                                 @PathVariable(value = "edicaoId") Long edicaoId,
                                  @PathVariable(value = "id") Long id) {
         Optional<Atividade> atividade = atividadeService.getById(id);
 
-        if (atividade.isEmpty()) {
+        if (!atividade.isPresent()) {
             return ResponseEntity.notFound().build();
+        }
+
+        if (!atividade.get().edicao.organizador.id.equals(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
 
         if (!Objects.equals(atividade.get().id, id)) {
