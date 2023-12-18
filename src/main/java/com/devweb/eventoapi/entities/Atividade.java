@@ -49,4 +49,31 @@ public class Atividade {
     @ManyToOne
     @JoinColumn(name = "edicao_id")
     public Edicao edicao;
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public void setHorarioInicio(Time horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public void setHorarioFim(Time horarioFim) {
+        this.horarioFim = horarioFim;
+    }
+    public void setEspaco(Espaco espaco) {
+        this.local = espaco;
+    }
+
+    public void setEdicao(Edicao edicao) {
+        this.edicao = edicao;
+    }
 }
