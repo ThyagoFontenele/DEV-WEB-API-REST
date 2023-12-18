@@ -67,4 +67,65 @@ public class Edicao {
     public Long getEdicaoId() {
       return this.id;
   }
+
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public Date getDatainicial() {
+        return dataInicial;
+    }
+
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public Usuario getOrganizador() {
+        return organizador;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public List<Espaco> getEspacos() {
+        return espacos;
+    }
+
+    public Evento get() {
+        return evento;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public void setDataInicial(Date dataInicial) {
+        this.dataInicial = dataInicial;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
+    }
+
+    public void setEspacos(List<Espaco> espacos) {
+        this.espacos = espacos;
+    }
 }

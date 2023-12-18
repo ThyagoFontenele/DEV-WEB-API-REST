@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import com.devweb.eventoapi.entities.Edicao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -98,7 +99,7 @@ public class AtividadesController extends AuthController {
             return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
 
-        Optional<Atividade> atividadePersistida = atividadeService.getById(atividade.id);
+        Atividade atividadePersistida = atividadeService.getById(id).orElse(null);
 
         if (!atividadePersistida.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -109,6 +110,8 @@ public class AtividadesController extends AuthController {
         }
 
         ValidationResult validationResult = atividadeService.saveOrUpdate(atividade);
+
+        ValidationResult validationResult = atividadeService.saveOrUpdate(atividadePersistida);
 
         return validationResult.isValid()
             ? ResponseEntity.ok(atividade)

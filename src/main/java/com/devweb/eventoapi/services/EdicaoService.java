@@ -3,6 +3,8 @@ package com.devweb.eventoapi.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.devweb.eventoapi.entities.Atividade;
+import com.devweb.eventoapi.model.ValidationResult;
 import org.springframework.stereotype.Service;
 
 import com.devweb.eventoapi.entities.Edicao;
@@ -31,5 +33,10 @@ public class EdicaoService {
 
     public void delete(Edicao entity) {
         edicaoRepository.delete(entity);
+    }
+
+    public ValidationResult saveOrUpdate(Edicao edicao) {
+        this.edicaoRepository.save(edicao);
+        return new ValidationResult();
     }
 }
