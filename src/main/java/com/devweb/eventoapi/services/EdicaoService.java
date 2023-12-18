@@ -3,7 +3,6 @@ package com.devweb.eventoapi.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.devweb.eventoapi.entities.Atividade;
 import com.devweb.eventoapi.model.ValidationResult;
 import org.springframework.stereotype.Service;
 

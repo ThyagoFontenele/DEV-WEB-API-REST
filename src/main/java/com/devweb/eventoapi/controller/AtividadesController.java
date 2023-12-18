@@ -78,6 +78,8 @@ public class AtividadesController extends AuthController {
             return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
 
+        atividade.edicao.id = edicaoId;
+        
         ValidationResult validationResult  = atividadeService.saveOrUpdate(atividade);
 
         return validationResult.isValid()
@@ -99,7 +101,7 @@ public class AtividadesController extends AuthController {
             return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
 
-        Atividade atividadePersistida = atividadeService.getById(id).orElse(null);
+        Optional<Atividade> atividadePersistida = atividadeService.getById(id);
 
         if (!atividadePersistida.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -110,8 +112,6 @@ public class AtividadesController extends AuthController {
         }
 
         ValidationResult validationResult = atividadeService.saveOrUpdate(atividade);
-
-        ValidationResult validationResult = atividadeService.saveOrUpdate(atividadePersistida);
 
         return validationResult.isValid()
             ? ResponseEntity.ok(atividade)

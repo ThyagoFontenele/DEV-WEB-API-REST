@@ -4,12 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import com.devweb.eventoapi.services.EdicaoService;
 import com.devweb.eventoapi.entities.Atividade;
 import com.devweb.eventoapi.entities.Espaco;
-import com.devweb.eventoapi.entities.Usuario;
 import com.devweb.eventoapi.model.ValidationResult;
 import com.devweb.eventoapi.repositories.AtividadeRepository;
 import com.devweb.eventoapi.repositories.EspacoRepository;

@@ -4,20 +4,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import com.devweb.eventoapi.entities.Atividade;
-import com.devweb.eventoapi.entities.Espaco;
 import com.devweb.eventoapi.model.ValidationResult;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.devweb.eventoapi.entities.Edicao;
+import com.devweb.eventoapi.entities.Usuario;
 import com.devweb.eventoapi.services.EdicaoService;
 import com.devweb.eventoapi.services.UsuarioService;
 
 @RestController
-@RequestMapping(path = "api/v1/eventos/{eventoId}/edicoes")
+@RequestMapping(path = "api/v1/edicoes")
 public class EdicoesController extends AuthController {
 
     private final EdicaoService edicaoService;
@@ -33,8 +31,7 @@ public class EdicoesController extends AuthController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable(value = "eventoId") int eventoId,
-                      @PathVariable(value = "id") Long id) {
+    public ResponseEntity get(@PathVariable(value = "id") Long id) {
 
         Optional<Edicao> edicao = edicaoService.getById(id);
 
@@ -48,22 +45,29 @@ public class EdicoesController extends AuthController {
     }
 
     @PostMapping
-    public ResponseEntity post(@RequestBody Edicao edicao) {
-        {
-            ValidationResult validationResult  = edicaoService.saveOrUpdate(edicao);
-
-            return validationResult.isValid()
-                    ? ResponseEntity.ok(edicao)
-                    : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
+    public ResponseEntity post(@CookieValue("authUserId") Long userId,
+                               @RequestBody Edicao edicao) {
+        if (!isUserAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
+
+        ValidationResult validationResult = edicaoService.saveOrUpdate(edicao);
+
+        return validationResult.isValid()
+                ? ResponseEntity.ok(edicao)
+                : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity put(@PathVariable(value = "eventoId") int eventoId,
-                    @PathVariable(value = "id") Long id, @RequestBody Edicao edicao) {
-
+    public ResponseEntity put(@CookieValue("authUserId") Long userId,
+                              @PathVariable(value = "id") Long id, 
+                              @RequestBody Edicao edicao) {
         if (id == null) {
             return ResponseEntity.unprocessableEntity().body("id field is required for this");
+        }
+
+        if (!isUserAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
         }
 
         Edicao edicaoPersistida = edicaoService.getById(id).orElse(null);
@@ -87,15 +91,37 @@ public class EdicoesController extends AuthController {
     }
 
     @PatchMapping("/{id}/organizador/{usuarioId}")
-    public void patch(@PathVariable(value = "eventoId") int eventoId,
-                      @PathVariable(value = "id") Long id,
-                      @PathVariable(value = "usuarioId") int usuarioId) {
+    public ResponseEntity patch(@CookieValue("authUserId") Long userId,
+                                @PathVariable(value = "id") Long id,
+                                @PathVariable(value = "usuarioId") Long usuarioId) {
+        if (id == null) {
+            return ResponseEntity.unprocessableEntity().body("id field is required for this");
+        }
 
+        if (!isUserAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+        }
+
+        Edicao edicaoPersistida = edicaoService.getById(id).orElse(null); 
+        
+        Optional<Usuario> organizador = getContextUser(usuarioId);
+
+        edicaoPersistida.organizador = organizador.get();
+
+        ValidationResult validationResult = edicaoService.saveOrUpdate(edicaoPersistida);
+
+        return validationResult.isValid()
+                ? ResponseEntity.ok(edicaoPersistida)
+                : ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getErrorMessage());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(value = "eventoId") int eventoId,
-                       @PathVariable(value = "id") Long id) {
+    public ResponseEntity delete(@CookieValue("authUserId") Long userId,
+                                 @PathVariable(value = "id") Long id) {
+        if (!isUserAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+        }
+
         Optional<Edicao> edicao = edicaoService.getById(id);
 
         if (edicao.isEmpty()) {
